@@ -3,7 +3,7 @@ const cluster = require("cluster");
 console.log("-----");
 
 if (cluster.isPrimary) {
-    console.log("This is the parent process");
+    console.log("This is the parent proces`s");
     cluster.fork();
    
 } else {
