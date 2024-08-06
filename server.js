@@ -9,13 +9,21 @@ server.listen(PORT, () => {
 
 server.route("get", "/", (request, response) => {
    response.json({message: "This is some text."});
+   process.send({action: "request"});
 });
 
 server.route("get", "/heavy", (request, response) => {
     for (let i = 0; i < 100000000; i++) {}
-    response.json({message: "Operation is now done!"})
+    response.json({message: "Operation is now done!"});
+    process.send({action: "request"});
+
 });
 
+process.send("Hello");
+
+process.on("message", (message, sendHandle) => {
+    console.log(`Worker ${process.pid} received this message from parent: ${message}`)
+});
 
 
 
